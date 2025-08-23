@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Shorts Cleaner",
+  "version": "1.1",
+  "description": "Hides the metadata panel on YouTube Shorts videos for a cleaner viewing experience.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://www.youtube.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/shorts/*"],
+      "css": ["styles.css"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

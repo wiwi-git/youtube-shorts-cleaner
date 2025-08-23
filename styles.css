@@ -1,0 +1,8 @@
+/* 
+  Finds the element with the id 'metapanel' and hides it,
+  only when the 'shorts-cleaner-active' class is present on the body.
+  The !important flag is used to ensure this style overrides any existing YouTube styles.
+*/
+body.shorts-cleaner-active #metapanel {
+  display: none !important;
+}
