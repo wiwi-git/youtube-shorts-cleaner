@@ -1,32 +1,22 @@
-const toggleSwitch = document.getElementById('toggleSwitch');
-const CSS_FILE = 'styles.css';
+const hideInfoBtn = document.getElementById('hideInfoBtn');
+const hideActionsBtn = document.getElementById('hideActionsBtn');
 
-// Load the saved state and set the toggle switch
-chrome.storage.sync.get('enabled', (data) => {
-  toggleSwitch.checked = !!data.enabled;
-});
-
-toggleSwitch.addEventListener('change', async () => {
-  const enabled = toggleSwitch.checked;
-  
-  // Save the new state
-  chrome.storage.sync.set({ enabled });
-
-  // Get the current active tab
+hideInfoBtn.addEventListener('click', async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-  // Apply or remove the CSS based on the new state
-  if (tab.url.startsWith('https://www.youtube.com/shorts/')) {
-    if (enabled) {
-      chrome.scripting.insertCSS({
-        target: { tabId: tab.id },
-        files: [CSS_FILE],
-      });
-    } else {
-      chrome.scripting.removeCSS({
-        target: { tabId: tab.id },
-        files: [CSS_FILE],
-      });
-    }
+  // Ensure we are on a YouTube Shorts page before sending the message
+  if (tab.url && tab.url.startsWith('https://www.youtube.com/shorts/')) {
+    chrome.tabs.sendMessage(tab.id, { action: 'hideShortsInfo' });
+  } else {
+    // Optional: Provide feedback to the user if they are not on a Shorts page
+    console.log("Not a YouTube Shorts page.");
+  }
+});
+
+hideActionsBtn.addEventListener('click', async () => {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+  if (tab.url && tab.url.startsWith('https://www.youtube.com/shorts/')) {
+    chrome.tabs.sendMessage(tab.id, { action: 'hideActions' });
   }
 });

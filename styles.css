@@ -1,8 +1,44 @@
-/* 
-  Finds the element with the id 'metapanel' and hides it,
-  only when the 'shorts-cleaner-active' class is present on the body.
-  The !important flag is used to ensure this style overrides any existing YouTube styles.
-*/
-body.shorts-cleaner-active #metapanel {
-  display: none !important;
+/* General Popup Styles */
+body {
+  width: 200px;
+  text-align: center;
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+  padding: 10px;
 }
+
+h3 {
+  color: #333;
+  margin-top: 0;
+}
+
+/* Button Styles */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* space between buttons */
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: #2196F3;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #1976D2;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+
+
